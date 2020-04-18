@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/clue"
+        android:layout_width="match_parent"
+        android:layout_margin="40dp"
+        android:layout_height="600dp"
+        android:gravity="center"
+        />
+    <Button
+        android:id="@+id/kitas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="false"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
+        android:text="scan" />
+
+</RelativeLayout>
