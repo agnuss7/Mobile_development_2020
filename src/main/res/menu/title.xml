@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="15dp">
+
+    <item
+        android:id="@+id/to_main"
+        android:title="to main page"
+        android:icon="@drawable/list"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/to_shop"
+        android:title="to downloads page"
+        android:icon="@drawable/downarrow"
+        app:showAsAction="ifRoom"
+        />
+
+
+
+</menu>

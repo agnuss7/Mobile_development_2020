@@ -21,7 +21,10 @@ import androidx.core.app.ComponentActivity
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.coroutines.coroutineContext
@@ -32,7 +35,7 @@ var progress:Int=0
 var fileName:String=""
 class QuestActivity : AppCompatActivity() {
 
-    class ss(file:File){
+    class CurrentQuest(file:File){
         val name:String
         val n:Int
         val i:Int
@@ -81,26 +84,24 @@ class QuestActivity : AppCompatActivity() {
         }
 
     }
-    fun read(file:String):String{
-        return File(applicationContext.filesDir,file).readText()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (supportActionBar != null)
+            supportActionBar?.hide()
         fileName = intent.getStringExtra("name")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quest_activity)
         val textView:TextView=findViewById(R.id.clue) as TextView
         val butt:Button=findViewById(R.id.kitas) as Button
-        val file=File(applicationContext.filesDir,"/quests/"+fileName)
-        val thing=ss(file)
+        val file=File(applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),"/quests/"+fileName)
+        val thing=CurrentQuest(file)
         if(thing.i==thing.n){
             textView.text="Sveikiname!"
             butt.text="Restart quest"
         } else {
         textView.text=thing.pair.first
         }
-        //val toast = Toast.makeText(applicationContext, file.toString(), Toast.LENGTH_SHORT)
-        //toast.show()
+
         butt?.setOnClickListener(){
             if(thing.i!=thing.n) {
                 val int = IntentIntegrator(this@QuestActivity)
@@ -117,7 +118,6 @@ class QuestActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //val textView:TextView=findViewById(R.id.clue) as TextView
         var result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
 
         if(result != null){
@@ -127,7 +127,7 @@ class QuestActivity : AppCompatActivity() {
                 if(secret==result.contents.toString()){
                     val toast = Toast.makeText(applicationContext, "teisingai!", Toast.LENGTH_SHORT)
                     toast.show()
-                    val file=File(applicationContext.filesDir,"/quests/"+fileName)
+                    val file=File(applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),"/quests/"+fileName)
                     var ssss=file.readText()
                     file.writeText(ssss.replace("<progress>${progress}</progress>","<progress>${progress+1}</progress>"))
 

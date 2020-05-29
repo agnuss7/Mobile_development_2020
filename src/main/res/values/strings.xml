@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ScanQuest</string>
+    <string name="dialog_delete">Ar tikrai norite ištrinti failą?</string>
 </resources>
